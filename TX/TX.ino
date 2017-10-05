@@ -3,7 +3,7 @@
 #include "RF24.h"
 
 RF24 radio(9, 10); // Setup RF24 mudule in 9 -  10 pins
-byte address[][6] = {"1Node", "2Node", "3Node", "4Node", "5Node", "6Node"}; //возможные номера труб
+byte address[][6] = {"1Node", "2Node", "3Node", "4Node", "5Node", "6Node"}; // avalible pipes
 
 //Left
 byte left_c = 2;
