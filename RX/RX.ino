@@ -30,8 +30,7 @@ word leftx;
 
 word maxSpeed;
 
-Servo yesServo;
-
+//Servo yesServo;
 
 
 void setup() {
@@ -47,14 +46,13 @@ void setup() {
   radio.openReadingPipe(1, address[0]);     // listem the pipe 0
   radio.setChannel(0x60);                   // select the channel (in which there is no noise!)
 
-  radio.setPALevel (RF24_PA_LOW);           // the level of transmit power RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX
-  radio.setDataRate (RF24_250KBPS);         // The transmitting speed RF24_2MBPS, RF24_1MBPS, RF24_250KBPS (should be same for transmitter and resiver)
+  radio.setPALevel (RF24_PA_MIN);           // the level of transmit power RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX
+  radio.setDataRate (RF24_1MBPS);           // The transmitting speed RF24_2MBPS, RF24_1MBPS, RF24_250KBPS (should be same for transmitter and resiver)
 
   radio.powerUp();
   radio.startListening();
 
-  //Servo pinn
-  //yesServo.attach(servoPin);
+//  yesServo.attach(servoPin);
 
   //Engine Setup
   pinMode(pinLF, OUTPUT);
@@ -64,7 +62,7 @@ void setup() {
   pinMode(Lpwm_pin, OUTPUT);
   pinMode(Rpwm_pin, OUTPUT);
 
-  maxSpeed = 180;
+  maxSpeed = 160;
 }
 
 
@@ -133,12 +131,13 @@ void loop() {
 
     lefty = recieved_data[0]; // default 496
     righty = recieved_data[1]; // default 516
-    leftx = recieved_data[2]; // default 496
+    leftx = recieved_data[2]; 
 
 
     Serial.print("Recived Left: "); Serial.println(lefty);
     Serial.print("Recived Right: "); Serial.println(righty);
 
+    // process left engine
 //    yesServo.write(
 //      map(leftx, 0, 1023, 60, 120)
 //    );
@@ -150,14 +149,14 @@ void loop() {
       left_stop();
     }
 
-    if (lefty > defaultLeft)
+    else if (lefty > defaultLeft)
     {
       left_forward(
         map(lefty, defaultLeft, 1023, 50, maxSpeed)
       );
     }
 
-    if (lefty < defaultLeft)
+    else if (lefty < defaultLeft)
     {
       left_back(
         map(lefty, defaultLeft, 0, 50, maxSpeed)
@@ -172,14 +171,14 @@ void loop() {
       right_stop();
     }
 
-    if (righty > defaultRight)
+    else if (righty > defaultRight)
     {
       right_forward(
         map(righty, defaultRight, 1023, 50, maxSpeed)
       );
     }
 
-    if (righty < defaultRight)
+    else if (righty < defaultRight)
     {
       right_back(
         map(righty, defaultRight, 0, 50, maxSpeed)

@@ -30,8 +30,8 @@ void setup() {
   radio.openWritingPipe(address[0]); // sent to the pipe 0
   radio.setChannel(0x60);            // select the channel (in which there is no noise!)
 
-  radio.setPALevel (RF24_PA_MAX);    // yhe level of transmit power RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX
-  radio.setDataRate (RF24_250KBPS);  // The transmitting speed RF24_2MBPS, RF24_1MBPS, RF24_250KBPS (should be same for transmitter and resiver)
+  radio.setPALevel (RF24_PA_MIN);    // yhe level of transmit power RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX
+  radio.setDataRate (RF24_1MBPS);  // The transmitting speed RF24_2MBPS, RF24_1MBPS, RF24_250KBPS (should be same for transmitter and resiver)
 
   radio.powerUp();
   radio.stopListening();
