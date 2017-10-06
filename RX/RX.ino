@@ -119,7 +119,7 @@ void loop() {
 
   byte pipeNo;
 
-  while ( radio.available(&pipeNo)) {  // слушаем эфир со всех труб
+  while ( radio.available(&pipeNo)) {  // listening all pipes
     radio.read( &recieved_data, sizeof(recieved_data) );
 
     //    transmit_data[0] = analogRead(LEFT_Y);
